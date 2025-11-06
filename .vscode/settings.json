@@ -1,12 +1,20 @@
 {
+  "python.defaultInterpreterPath": "${workspaceFolder}\\venv\\Scripts\\python.exe",
+  "[python]": {
+    // Use Ruff linter on save
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true
+  },
   "terminal.integrated.profiles.windows": {
     "PowerShell": {
       "source": "PowerShell",
       // Indicate the path to execute our file + bypass the execution policy of the powershell terminal
       "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-      "args": ["-ExecutionPolicy", "RemoteSigned"]
+      "args": [
+        "-ExecutionPolicy",
+        "RemoteSigned"
+      ]
     }
   },
-  "terminal.integrated.defaultProfile.windows": "PowerShell",
-  "python-envs.pythonProjects": []
+  "terminal.integrated.defaultProfile.windows": "PowerShell"
 }
