@@ -1,0 +1,12 @@
+{
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      // Indicate the path to execute our file + bypass the execution policy of the powershell terminal
+      "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "args": ["-ExecutionPolicy", "RemoteSigned"]
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "python-envs.pythonProjects": []
+}
