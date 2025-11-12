@@ -1,10 +1,12 @@
 {
-  // "python.defaultInterpreterPath": "${workspaceFolder}\\venv\\Scripts\\python.exe",
+  //Pick the right path to the python interpreter depending on if u are on windows or Linux/MacOS
+  "python.defaultInterpreterPath": "${workspaceFolder}/venv/Scripts/python${pathSeparator}venv/bin/python",
   "[python]": {
     // Use Ruff linter on save
     "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.formatOnSave": true
   },
+  // Window terminal setup
   "terminal.integrated.profiles.windows": {
     "PowerShell": {
       "source": "PowerShell",
@@ -16,5 +18,25 @@
       ]
     }
   },
-  "terminal.integrated.defaultProfile.windows": "PowerShell"
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  // Linux terminal setup
+  "terminal.integrated.profiles.linux": {
+    "bash": {
+      "path": "/bin/bash",
+      "args": [
+        "--login"
+      ]
+    }
+  },
+  "terminal.integrated.defaultProfile.linux": "bash",
+  // MacOS terminal setup
+  "terminal.integrated.profiles.osx": {
+    "zsh": {
+      "path": "/bin/zsh",
+      "args": [
+        "--login"
+      ]
+    }
+  },
+  "terminal.integrated.defaultProfile.osx": "zsh"
 }
