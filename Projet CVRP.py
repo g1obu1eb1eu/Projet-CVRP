@@ -13,8 +13,8 @@ path_to_instances = Path(__file__).parent / "full_dataset"
 # Path to specific instance & solution files
 
 # Dataset 1
-instance_file = path_to_instances / "H-n32-k5.vrp"
-solution_file = path_to_instances / "A-n32-k5.sol"
+instance_file = path_to_instances / "H-n32-k6.vrp"
+solution_file = path_to_instances / "H-n32-k6.sol"
 
 # # Dataset 2
 # instance_file = path_to_instances / "X-n101-k25.vrp"
@@ -33,14 +33,27 @@ solution = vrplib.read_solution(solution_file)
 
 
 # Instances initialisation
-coords = instance["NODE_COORD"]
-demands = instance["DEMAND_SECTION"]
-capacity = instance["CAPACITY"]
+coords = instance["node_coord"]
+demands = instance["demand"]
+capacity = instance["capacity"]
 
-nb_nodes = instance["DIMENSION"]
-nodes = list(range(1, nb_nodes+1))
-depot = instance["DEPOT_SECTION"]
-customers = [i for i in nodes if i!= depot]
+nb_nodes = instance["dimension"]
+nodes = list(range(1, nb_nodes + 1))
+depot = instance["depot"]
+customers = [i for i in nodes if i != depot]
+
+nb_trucks = None
+comment = instance["comment"]
+
+if comment:
+    import re
+    num_trucks = re.search(r"No of trucks[:\s]*(\d+)\s*,", comment)
+
+    if num_trucks:
+        nb_trucks = int(num_trucks.group(1))
+
+if nb_trucks is None:
+    print("eroooooooooor")
 
 # instance_items = instance.items()
 # solution_items = solution.items()
@@ -95,6 +108,7 @@ customers = [i for i in nodes if i!= depot]
 #     plt.axis("on")
 #     ax.tick_params(left=True, bottom=True, labelleft=True, labelbottom=True)
 #     plt.show()
+
 
 # show_graph(instance["edge_weight"], instance["node_coord"])
 
