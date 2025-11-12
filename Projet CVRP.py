@@ -6,6 +6,7 @@ import vrplib
 from pathlib import Path
 import pulp
 import time
+import math
 
 # Path to CVRP instance directory
 path_to_instances = Path(__file__).parent / "full_dataset"
@@ -38,8 +39,8 @@ demands = instance["demand"]
 capacity = instance["capacity"]
 
 nb_nodes = instance["dimension"]
-nodes = list(range(1, nb_nodes + 1))
-depot = instance["depot"]
+nodes = list(range(1, nb_nodes))
+depot = int(instance["depot"].item())
 customers = [i for i in nodes if i != depot]
 
 nb_trucks = None
@@ -47,13 +48,36 @@ comment = instance["comment"]
 
 if comment:
     import re
+
     num_trucks = re.search(r"No of trucks[:\s]*(\d+)\s*,", comment)
 
     if num_trucks:
         nb_trucks = int(num_trucks.group(1))
 
 if nb_trucks is None:
-    print("eroooooooooor")
+    # print("erroooooooooor")
+    raise ValueError("val not found")
+
+
+def matrice_dist(i, j):
+    xi, yi = coords[i]
+    xj, yj = coords[j]
+    return round(math.hypot(xi - xj, yi - yj))
+
+c = {(i, j): (0 if i == j else matrice_dist(i, j)) for i in nodes for j in nodes}
+
+d = {i: demands[i] for i in nodes}
+d[depot] = 0
+
+capa_globale = {k: capacity for k in range(1, nb_trucks + 1)}
+
+compat = {(i, k): 1 for i in customers for k in range(1, nb_trucks + 1)}
+
+cout_fixe = {k : 0.0 for k in range (1, nb_trucks+1)}
+
+print(f"\nFile name: {instance_file.name}")
+print(f"Dimension: {nb_nodes}, depot node num: {depot}, customers: {len(customers)}, vehicles (nb_trucks): {nb_trucks}, capacity: {capacity}")
+print("Démarrage du modèle PuLP...")
 
 # instance_items = instance.items()
 # solution_items = solution.items()
@@ -113,15 +137,15 @@ if nb_trucks is None:
 # show_graph(instance["edge_weight"], instance["node_coord"])
 
 
-def linear_program(node_coord):
-    n = len(node_coord)
+# def linear_program(node_coord):
+#     n = len(node_coord)
 
-    # Initialisation resolution pblm hrcvrpcc
-    prob = pulp.LpProblem("HRCVRPP", pulp.LpMinimize)
+#     # Initialisation resolution pblm hrcvrpcc
+#     prob = pulp.LpProblem("HRCVRPP", pulp.LpMinimize)
 
-    x = {
-        (i, j): pulp.LpVariable(f"x{{{i}_{j}}}", cat="Binary")
-        for i in range(n)
-        for j in range(n)
-        if (i != j)
-    }
+#     x = {
+#         (i, j): pulp.LpVariable(f"x{{{i}_{j}}}", cat="Binary")
+#         for i in range(n)
+#         for j in range(n)
+#         if (i != j)
+#     }
