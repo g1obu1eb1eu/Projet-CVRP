@@ -1,5 +1,5 @@
 NAME : H-n32-k6
-COMMENT : (Augerat et al, No of trucks: 6, Optimal value: 1542)
+COMMENT : (Augerat et al, No of trucks: 6, Optimal value: 1205)
 TYPE : CVRP
 DIMENSION : 32
 EDGE_WEIGHT_TYPE : EUC_2D 
@@ -103,6 +103,13 @@ VEHICLE_TYPE_SECTION
 30 1
 31 2
 32 3
+TRUCK_TYPE_SECTION
+1 1 
+2 2 
+3 3 
+4 1 
+5 2 
+6 3
 DEPOT_SECTION 
  1
  -1
