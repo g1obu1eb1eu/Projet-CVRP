@@ -21,16 +21,16 @@ path_to_instances = (
 # Path to specific instance & solution files
 
 # Dataset 1
-# instance_file = path_to_instances / "H-n32-k6.vrp"
-# solution_file = path_to_instances / "H-n32-k6.sol"  # solution associée
+instance_file = path_to_instances / "H-n32-k6.vrp"
+solution_file = path_to_instances / "H-n32-k6.sol"  # solution associée
 
 # Dataset 2
 # instance_file = path_to_instances / "H-n100-k27.vrp"
 # solution_file = path_to_instances / "H-n100-k27.sol"
 
 # Dataset 3
-instance_file = path_to_instances / "H-n200-k18.vrp"
-solution_file = path_to_instances / "H-n200-k18.sol"
+# instance_file = path_to_instances / "H-n200-k18.vrp"
+# solution_file = path_to_instances / "H-n200-k18.sol"
 
 
 if not instance_file:
@@ -1049,16 +1049,16 @@ def show_roads_2():
 
 if __name__ == "__main__":
     # ---------------------------------------------------------
-    # start = time.time()
+    start = time.time()
 
-    # prob, K, V, x = linear_program(nb_trucks, nodes, compat)
-    # fonction_solver(prob)
-    # total_cost_sum = pulp.value(prob.objective)
-    # print(f"Objective val : {total_cost_sum}")
-    # all_routes_PL = show_roads(K, V, x)
-    # end = time.time()
-    # print(f"Temps d’exécution : {end - start:.2f} s")
-    # show_graph(all_routes_PL, total_cost_sum)
+    prob, K, V, x = linear_program(nb_trucks, nodes, compat)
+    fonction_solver(prob)
+    total_cost_sum = pulp.value(prob.objective)
+    print(f"Objective val : {total_cost_sum}")
+    all_routes_PL = show_roads(K, V, x)
+    end = time.time()
+    print(f"Temps d’exécution : {end - start:.2f} s")
+    show_graph(all_routes_PL, total_cost_sum)
 
     # ---------------------------------------------------------
     # Le bloc ci-dessus concerne le PL -> commenter ce dernier lorsque instances > 50
